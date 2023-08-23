@@ -1,1 +1,1 @@
-apikey =  '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'
+apikey =  'your_openAI_key_here'
