@@ -11,7 +11,7 @@ from langchain.chat_models import ChatOpenAI
 from htmlTemplates import css, bot_template, user_template
 
 
-os.environ['OPENAI_API_KEY'] ='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'
+os.environ['OPENAI_API_KEY'] ='yourkeyhere'
 
 def get_documents_from_df(doc_,name_col):
     df  =  pd.read_csv(doc_)
