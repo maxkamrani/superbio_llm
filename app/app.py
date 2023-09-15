@@ -6,17 +6,15 @@ from langchain.embeddings.openai import OpenAIEmbeddings
 import os 
 import pandas as pd
 from langchain.document_loaders import DataFrameLoader
-from streamlit_chat import message
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationalRetrievalChain
 from langchain.chat_models import ChatOpenAI
 from htmlTemplates import css, bot_template, user_template
 
 
-import header 
 
 
-os.environ['OPENAI_API_KEY'] ='yourkeyhere'
+os.environ['OPENAI_API_KEY'] ='sk-XXXX'
 
 def get_documents_from_df(doc_,name_col):
     df  =  pd.read_csv(doc_)
@@ -27,10 +25,12 @@ def get_documents_from_df(doc_,name_col):
 def get_vector_store(documents_):
     embedding = OpenAIEmbeddings()
     vectorstore = FAISS.from_documents(documents_, embedding)
+    print(embedding)
+    print(vectorstore)
     return  vectorstore
 
 def get_conversation_chain(vectorstore):
-    llm = ChatOpenAI(temperature=0.0)
+    llm = ChatOpenAI()
     memory = ConversationBufferMemory(
         memory_key='chat_history', return_messages=True)
     conversation_chain = ConversationalRetrievalChain.from_llm(
@@ -58,12 +58,11 @@ def main():
     st.set_page_config(page_title="Superbio AI-Helper",
                        page_icon=":dna:")
     
-    st.header("Superbio GPT :dna:")
+    st.header("SuperbioGPT :dna:")
 
-
-    #session states init
     #if uploaded_file: 
-    user_question = st.text_input("I am chatbot to help blabla ") 
+    st.info('Hi there! I’m superbioGPT:dna: I can find apps for your use case and provide info on data requirements. For instance you can ask me: “What app should I use for protein folding?” or “What should my csv look like?”')
+    user_question = st.text_input('Send a message below 👇') 
     
     if user_question:
         handle_userinput(user_question)
@@ -92,12 +91,11 @@ def main():
                     # create vector store
                     vectorstore = get_vector_store(documents)
 
-                    st.session_state.conversation  = get_conversation_chain(vectorstore)
+                    st.session_state.conversation = get_conversation_chain(vectorstore)
 
 
 
 if __name__ == '__main__' :
     main() 
-
 
 
