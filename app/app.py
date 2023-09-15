@@ -1,5 +1,5 @@
 
-import header
+from header import * 
 
 
 def get_documents_from_df(doc_,name_col):
