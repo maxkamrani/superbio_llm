@@ -6,3 +6,12 @@
 5. pip install streamlit langchain openai wikipedia chromadb tiktoken
 
 Ref  : https://www.youtube.com/watch?v=qqDZ6EjoD8E
+
+* image can easely be created here  https://imgbb.com/
+
+next steps : 
+* make the model more accurate
+* benchmark embeddings, vectorstore, chuncks open source LLms 
+* extract any data
+* improve chat UI
+* extract API data
